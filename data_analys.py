@@ -4,12 +4,13 @@ import json
 import datetime
 import matplotlib.pyplot as plt
 import numpy as np; np.random.seed(1)
+from get_data import get_data
 
-data = json.loads(open("data.json").read())['RECORDS'];
+data = get_data()#json.loads(open("data.json").read())['RECORDS'];
 print('loaded')
-x = [datetime.datetime.strptime(i['add_date'], "%Y.%m.%d %H:%M:%S") for i in data]
+x = [datetime.datetime.strptime(i[1], "%Y.%m.%d %H:%M:%S") for i in data]
 y = [n for n, i in enumerate(data)]
-names = np.array([str(i['user_id']) for i in data])
+names = np.array([str(i[0]) for i in data])
 
 norm = plt.Normalize(1,4)
 cmap = plt.cm.RdYlGn
